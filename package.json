@@ -1,0 +1,48 @@
+{
+  "name": "tts-react-web-synthesis",
+  "version": "1.0.0",
+  "description": "React hook and component for converting text to speech using the Web Speech API or Amazon Polly.",
+  
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./*": "./dist/*.js",
+    "./package.json": "./package.json"
+  },
+  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "test": "jest",
+    "check-types": "tsc --noEmit",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "babel src --out-dir dist --extensions '.ts,.tsx'",
+    "build:base": "npm run build:types && npm run build:js",
+    "build:umd": "microbundle -i src/index.ts -o dist/umd/tts-react.min.js -f umd --no-pkg-main --name='TTSReact' --globals react='React' --jsx='' --jsxFragment='' --tsconfig='./tsconfig.umd.json'",
+    "build:storybook": "npm run build:base && build-storybook -o demo/build -c demo/.storybook",
+    "build": "npm run build:base && npm run build:umd",
+    "lint": "eslint . src demo --ignore-pattern dist --ext .ts,.tsx",
+    "prettier": "prettier --no-error-on-unmatched-pattern --write *.ts {src,demo,__tests__}/**/*.{ts,tsx}",
+    "demo": "npm run build:base && start-storybook -c demo/.storybook -p 3000",
+    "prepack": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devopsjavauser/tts-react-web-synthesis.git"
+  },
+
+  "keywords": [
+    "text-to-speech",
+    "tts",
+    "react",
+    "speech",
+    "synthesis",
+    "amazon-polly"
+  ],
+  "author": "Arunkumar.c",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devopsjavauser/tts-react-web-synthesis/issues"
+  },
+  "homepage": "https://github.com/devopsjavauser/tts-react-web-synthesis#readme"
+}
